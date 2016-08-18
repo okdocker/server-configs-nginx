@@ -12,7 +12,7 @@ release:
 	docker build --no-cache -t $(DOCKER_IMAGE):$(VERSION) .
 
 push:
-	gcloud docker push $(DOCKER_IMAGE):$(VERSION)
+	docker push $(DOCKER_IMAGE):$(VERSION)
 
 run:
 	docker run -it -p 80:80 -p 443:443 $(DOCKER_RUN_OPTIONS) --rm $(DOCKER_IMAGE):$(VERSION) $(DOCKER_RUN_COMMAND)
