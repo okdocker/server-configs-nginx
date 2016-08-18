@@ -1,0 +1,21 @@
+# www to non-www redirect -- duplicate content is BAD:
+# https://github.com/h5bp/html5-boilerplate/blob/5370479476dceae7cc3ea105946536d6bc0ee468/.htaccess#L362
+# Choose between www and non-www, listen on the *wrong* one and redirect to
+# the right one -- http://wiki.nginx.org/Pitfalls#Server_Name
+server {
+  listen [::]:80 default_server deferred;
+  listen 80 deferred;
+
+  # Path for static files
+  root /var/www/default;
+
+  # Specify a charset
+  charset utf-8;
+
+  # Custom 404 page
+  error_page 404 /404.html;
+
+  # Include the basic h5bp config set
+  include h5bp/basic.conf;
+  include pagespeed/basic.conf;
+}

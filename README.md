@@ -5,6 +5,8 @@ your server improve the web site's performance and security, while also
 ensuring that resources are served with the correct content-type and are
 accessible, if needed, even cross-domain.
 
+**This fork adds the support for building an image with the okdocker/nginx docker image, which contains ngx_pagespeed extension.**
+
 
 ## Documentation
 
