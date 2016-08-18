@@ -1,7 +1,7 @@
 NAME ?= nginx-example
 DOCKER_NAMESPACE ?= rdorgueil
 DOCKER_IMAGE ?= $(DOCKER_NAMESPACE)/$(NAME)
-DOCKER_RUN_OPTIONS ?= --link backend:backend
+DOCKER_RUN_OPTIONS ?= 
 DOCKER_RUN_COMMAND ?= 
 VERSION ?= $(shell git describe)
 STAGE ?= preprod

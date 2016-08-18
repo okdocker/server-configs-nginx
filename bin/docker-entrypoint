@@ -1,0 +1,11 @@
+#! /bin/bash
+
+echo "--------------------------------------------------------------------------------"
+echo "script: $0"
+echo "hostname:" `hostname`
+echo "date:" `date`
+echo "--------------------------------------------------------------------------------"
+
+chown -R www-data:www-data /var/cache/nginx
+exec nginx -g 'daemon off;'
+
