@@ -31,7 +31,7 @@ server {
       access_log off;
     }
 
-    include rdbp/proxy.conf;
+    include proxy/basic.conf;
     proxy_pass http://backend:3080;
     proxy_pass_header Cache-Control;
   }
