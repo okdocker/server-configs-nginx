@@ -9,7 +9,7 @@ STAGE ?= preprod
 .PHONY: push release run bash
 
 release:
-	docker build --no-cache -t $(DOCKER_IMAGE):$(VERSION) .
+	docker build -t $(DOCKER_IMAGE):$(VERSION) .
 
 push:
 	docker push $(DOCKER_IMAGE):$(VERSION)
