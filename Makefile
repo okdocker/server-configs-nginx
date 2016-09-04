@@ -9,11 +9,11 @@ STAGE ?= preprod
 .PHONY: push release run bash
 
 release:
-	docker build --no-cache -t $(DOCKER_IMAGE):$(VERSION) .
+	docker build -t $(DOCKER_IMAGE):$(VERSION) .
 
 push:
 	docker push $(DOCKER_IMAGE):$(VERSION)
 
 run:
-	docker run -it -p 80:80 -p 443:443 $(DOCKER_RUN_OPTIONS) --rm $(DOCKER_IMAGE):$(VERSION) $(DOCKER_RUN_COMMAND)
+	docker run -it -p 80:80 -p 443:443 --link backend $(DOCKER_RUN_OPTIONS) --rm $(DOCKER_IMAGE):$(VERSION) $(DOCKER_RUN_COMMAND)
 
