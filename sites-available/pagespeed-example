@@ -1,0 +1,38 @@
+server {
+  listen [::]:80 default_server deferred;
+  listen 80 deferred;
+
+  # Path for static files
+  root /var/www/default;
+
+  # Specify a charset
+  charset utf-8;
+
+  # Custom 404 page
+  error_page 404 /404.html;
+
+  # Pagespeed basic config
+  include pagespeed/basic.conf;
+  include pagespeed/aggressive.conf;
+  include pagespeed/admin.conf;
+
+  # Pass requests to the internal backend proxy location.
+  location / {
+    try_files $uri @backend;
+  }
+
+  # Internal backend proxy location.
+  location @backend {
+    internal;
+
+    if ($request_filename ~* \.(jpg|jpeg|gif|png|bmp|ico|pdf|flv|swf|txt|css|js|otf|eot|svg|ttf|woff|woff2|map)$) {
+      expires 7d;
+      add_header Cache-control public;
+      access_log off;
+    }
+
+    include rdbp/proxy.conf;
+    proxy_pass http://backend:3080;
+    proxy_pass_header Cache-Control;
+  }
+}
