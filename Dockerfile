@@ -1,4 +1,4 @@
-FROM okdocker/nginx
+FROM okdocker/nginx-ng:1.11.3-1.11.33.3
 
 ADD mime.types nginx.conf /etc/nginx/
 ADD h5bp /etc/nginx/h5bp
