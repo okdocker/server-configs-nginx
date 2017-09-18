@@ -31,7 +31,7 @@ statemtents, directives are defined like so:
 	# Make sure js files are served with a long expire
 	location ~* \.js$ {
 		add_header "section" "long expire"; # for illustration only
-		expires 1y;
+		add_header Cache-Control "max-age=31536000";
 	}
 
 	# Oh, and kill etags for js files
@@ -54,7 +54,6 @@ Only ONE of these location blocks will be used:
 	Last-Modified: Tue, 29 Oct 2013 15:17:17 GMT
 	Connection: keep-alive
 	ETag: "526fd17d-1"
-	Expires: Fri, 23 Oct 2015 09:58:47 GMT
 	Cache-Control: max-age=31536000
 	section: long expire
 	Accept-Ranges: bytes
@@ -65,7 +64,7 @@ location block:
 	location ~* \.js$ {
 		# Make sure js files are served with a long expire
 		add_header "section" "long expire"; # for illustration only
-		expires 1y;
+		add_header Cache-Control "max-age=31536000";
 		add_header "section" "no etags"; # for illustration only
 		etag off;
 	}
@@ -80,7 +79,6 @@ Which would then yield:
 	Content-Length: 1
 	Last-Modified: Tue, 29 Oct 2013 15:17:17 GMT
 	Connection: keep-alive
-	Expires: Fri, 23 Oct 2015 10:00:22 GMT
 	Cache-Control: max-age=31536000
 	section: long expire
 	section: no etags
@@ -148,7 +146,6 @@ will be a 404. The reason for this is that H5bp's basic ruleset includes, for ex
 	location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|htc)$ {
 		expires 1M;
 		access_log off;
-		add_header Cache-Control "public";
 	}
 
 Which will _also_ capture any dynamic requests matching that url pattern and not
@@ -166,7 +163,6 @@ Modifying (all) location blocks as follows:
 
 		expires 1M;
 		access_log off;
-		add_header Cache-Control "public";
 	}
 
 Will make Nginx pass requests for files that don't exist to the application.
